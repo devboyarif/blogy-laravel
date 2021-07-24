@@ -10,4 +10,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', [AdminController::class, 'index'])->name('home');
+// admin
+Route::middleware(['auth'])->prefix('dashboard')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('home');
+    Route::view('category', 'admin.category')->name('category');
+});
