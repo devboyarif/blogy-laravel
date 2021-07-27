@@ -11,13 +11,22 @@ class Category extends Component
 {
     use Notification;
 
+    public $total, $count = 5;
     public $categories, $name, $category_id, $updateMode = false;
+
 
     // Data Redering
     public function render()
     {
-        $this->categories = Categoryy::all();
+        $this->categories = Categoryy::take($this->count)->latest()->get();
+        $this->total = Categoryy::count();
         return view('livewire.category.category');
+    }
+
+    // Load More Data
+    public function load()
+    {
+        $this->count += 5;
     }
 
     // Data Restore
@@ -68,11 +77,13 @@ class Category extends Component
 
         $this->updateMode = false;
         $this->resetInputFields();
+        $this->notifySuccess('Category Updated Successfully');
     }
 
     // Data Delete
     public function delete($id)
     {
         Categoryy::findOrFail($id)->delete();
+        $this->notifySuccess('Category Deleted Successfully');
     }
 }
