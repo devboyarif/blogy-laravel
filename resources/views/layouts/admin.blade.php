@@ -55,7 +55,11 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-child-indent" data-widget="treeview"
                         role="menu" data-accordion="false">
-                        <li class="nav-item menu-open">
+                        <x-sidebar-list :linkActive="Route::is('home') ? true : false" route="home"
+                            icon="fas fa-tachometer-alt">
+                            Dashbaord
+                        </x-sidebar-list>
+                        {{-- <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
@@ -71,15 +75,11 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('category') }}" class="nav-link">
-                                <i class="nav-icon fas fa-tags"></i>
-                                <p>
-                                    Category
-                                </p>
-                            </a>
-                        </li>
+                        </li> --}}
+                        <x-sidebar-list :linkActive="Route::is('category') ? true : false" route="category"
+                            icon="fas fa-tags">
+                            Category
+                        </x-sidebar-list>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
