@@ -87,6 +87,14 @@
                         <x-sidebar-list :linkActive="Route::is('tag') ? true : false" route="tag" icon="fas fa-tags">
                             Tag
                         </x-sidebar-list>
+
+                        <li class="nav-item">
+                            <a target="_blank" href="{{ route('index') }}" class="nav-link bg-primary text-light">
+                                <i class="nav-icon fas fa-link"></i>
+                                <p>Visit Website</p>
+                            </a>
+                        </li>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
