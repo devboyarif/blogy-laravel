@@ -81,8 +81,11 @@
                             </ul>
                         </li> --}}
                         <x-sidebar-list :linkActive="Route::is('category') ? true : false" route="category"
-                            icon="fas fa-tags">
+                            icon="fas fa-list">
                             Category
+                        </x-sidebar-list>
+                        <x-sidebar-list :linkActive="Route::is('tag') ? true : false" route="tag" icon="fas fa-tags">
+                            Tag
                         </x-sidebar-list>
                     </ul>
                 </nav>

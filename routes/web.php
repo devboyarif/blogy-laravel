@@ -14,4 +14,5 @@ Auth::routes();
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('home');
     Route::view('category', 'admin.category')->name('category');
+    Route::view('tag', 'admin.tag')->name('tag');
 });
