@@ -16,6 +16,10 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('backend') }}/dist/css/adminlte.min.css">
 
+    {{-- Toastr notification --}}
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     @yield('style')
 </head>
 
@@ -142,7 +146,53 @@
     {{-- <script src="{{ asset('backend') }}/dist/js/demo.js"></script> --}}
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     {{-- <script src="{{ asset('backend') }}/dist/js/pages/dashboard3.js"></script> --}}
+    <!-- toastr notification -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js">
+    </script>
 
+    {{-- <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}", 'Success!')
+        @elseif(Session::has('warning'))
+            toastr.warning("{{ Session::get('warning') }}", 'Warning!')
+        @elseif(Session::has('error'))
+            toastr.error("{{ Session::get('error') }}", 'Error!')
+        @endif
+        // toast config
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "hideMethod": "fadeOut"
+        }
+    </script> --}}
+    <script>
+        window.addEventListener('alert', event => {
+            toastr[event.detail.type](event.detail.message,
+                event.detail.title ?? ''), toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "newestOnTop": true,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "hideMethod": "fadeOut"
+            }
+        });
+    </script>
     @yield('script')
 </body>
 
