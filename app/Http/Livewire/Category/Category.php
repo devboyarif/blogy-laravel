@@ -11,15 +11,18 @@ class Category extends Component
 {
     use Notification;
 
-    public $total, $count = 5;
+    public $loadbutton = true, $total, $count = 5;
+    public $searchTerm;
     public $categories, $name, $category_id, $updateMode = false;
 
 
     // Data Redering
     public function render()
     {
-        $this->categories = Categoryy::take($this->count)->latest()->get();
+        $searchTerm = '%' . $this->searchTerm . '%';
+        $this->categories = Categoryy::where('name', 'LIKE', $searchTerm)->take($this->count)->latest()->get();
         $this->total = Categoryy::count();
+
         return view('livewire.category.category');
     }
 
@@ -27,6 +30,18 @@ class Category extends Component
     public function load()
     {
         $this->count += 5;
+    }
+
+    // Data Search
+    public function updatingSearchTerm($value)
+    {
+        if ($value) {
+            $this->loadbutton = false;
+            $this->count = Categoryy::count();
+        } else {
+            $this->loadbutton = true;
+            $this->count = 5;
+        }
     }
 
     // Data Restore

@@ -150,32 +150,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js">
     </script>
 
-    {{-- <script>
-        @if (Session::has('success'))
-            toastr.success("{{ Session::get('success') }}", 'Success!')
-        @elseif(Session::has('warning'))
-            toastr.warning("{{ Session::get('warning') }}", 'Warning!')
-        @elseif(Session::has('error'))
-            toastr.error("{{ Session::get('error') }}", 'Error!')
-        @endif
-        // toast config
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": true,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": true,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "hideMethod": "fadeOut"
-        }
-    </script> --}}
     <script>
         window.addEventListener('alert', event => {
             toastr[event.detail.type](event.detail.message,

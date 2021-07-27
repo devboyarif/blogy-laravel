@@ -2,7 +2,14 @@
     <div class="col-8">
         <div class="card">
             <div class="card-header bg-dark text-light">
-                Category List
+                <div class="row">
+                    <div class="col-8">
+                        <h5>Category List</h5>
+                    </div>
+                    <div class="col-4">
+                        <input wire:model="searchTerm" type="text" class="form-control" placeholder="Search">
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table">
@@ -34,15 +41,17 @@
                         @endforelse
                     </tbody>
                 </table>
-                @if (count($categories) >= $total)
-                    <div class="text-center">No more data found</div>
-                @else
-                    <div class="text-center mt-3">
-                        <button wire:click="load" wire:loading.attr="disabled" class="btn btn-primary">Load More
-                            Data</button>
-                    </div>
-                @endif
 
+                @if ($loadbutton)
+                    @if (count($categories) >= $total)
+                        <div class="text-center">No more data found</div>
+                    @else
+                        <div class="text-center mt-3">
+                            <button wire:click="load" wire:loading.attr="disabled" class="btn btn-primary">Load More
+                                Data</button>
+                        </div>
+                    @endif
+                @endif
             </div>
         </div>
     </div>
