@@ -50,12 +50,24 @@ class Category extends Component
         $this->reset();
     }
 
+    // Data Validation
+    public function validation($method = null)
+    {
+        if (!$method) {
+            return $this->validate([
+                'name' => 'required|unique:categories,name',
+            ]);
+        } else {
+            return $this->validate([
+                'name' => "required|unique:categories,name,{$this->category_id}",
+            ]);
+        }
+    }
+
     // Data Store
     public function store()
     {
-        $validatedDate = $this->validate([
-            'name' => 'required',
-        ]);
+        $validatedDate = $this->validation();
 
         Categoryy::create($validatedDate);
 
@@ -83,9 +95,7 @@ class Category extends Component
     // Data Update
     public function update()
     {
-        $validatedDate = $this->validate([
-            'name' => 'required',
-        ]);
+        $validatedDate = $this->validation('Put');
 
         $category = Categoryy::find($this->category_id);
         $category->update($validatedDate);
