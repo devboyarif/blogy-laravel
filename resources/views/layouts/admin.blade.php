@@ -37,8 +37,36 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-                <li class="nav-item">
-                    Admin
+                <li>
+                    <div class="dropdown">
+                        <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <img width="30px" height="30px" class="rounded-circle mr-1"
+                                src="{{ asset('backend/image/default.png') }}"
+                                alt="User profile picture">{{ auth()->user()->name }}
+                            {{-- @if ($user->image)
+                                <img width="30px" height="30px" class="rounded-circle mr-1"
+                                    src="{{ asset($user->image) }}"
+                                    alt="User profile picture">{{ $user->firstname }}
+                            @else
+                                <img width="30px" height="30px" class="rounded-circle mr-1"
+                                    src="{{ asset('backend/image/defult.png') }}"
+                                    alt="User profile picture">{{ $user->firstname }}
+                            @endif --}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <a href="{{ route('index') }}" class="dropdown-item text-primary" type="button"><i
+                                    class="fas fa-user"></i> Profile</a>
+                            <a href="{{ route('index') }}" class="dropdown-item text-primary" type="button"><i
+                                    class="fas fa-user-cog"></i> Setting</a>
+                            <a class="dropdown-item text-danger" role="button" href="javascript:void(0)"
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
+                                    class="fas fa-sign-out-alt"></i> Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -88,7 +116,7 @@
                             Tag
                         </x-sidebar-list>
 
-                        <li class="nav-item">
+                        <li class="nav-item mt-5">
                             <a target="_blank" href="{{ route('index') }}" class="nav-link bg-primary text-light">
                                 <i class="nav-icon fas fa-link"></i>
                                 <p>Visit Website</p>
