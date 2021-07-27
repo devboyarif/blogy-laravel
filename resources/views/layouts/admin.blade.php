@@ -167,6 +167,8 @@
             }
         });
     </script>
+    {{-- alpinejs --}}
+    <script src="//unpkg.com/alpinejs" defer></script>
     @yield('script')
 </body>
 

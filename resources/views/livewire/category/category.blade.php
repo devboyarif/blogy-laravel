@@ -15,34 +15,19 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Id</th>
                             <th>Name</th>
+                            <th>Status</th>
+                            <th>Featured</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($categories as $category)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $category->name }}</td>
-                                <td>
-                                    {{-- edit --}}
-                                    <button wire:click="edit({{ $category->id }})" class="btn btn-info">Edit</button>
-                                    {{-- delete method 2 --}}
-                                    <button onclick="confirm('Confirm delete?') || event.stopImmediatePropagation()"
-                                        wire:click="delete({{ $category->id }})"
-                                        class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td class="text-center" colspan="6"> Nothing Found</td>
-                            </tr>
-                        @endforelse
+                        @each('livewire.category.list', $categories, 'category', 'components.notfound')
                     </tbody>
                 </table>
 
-                @if ($loadbutton)
+                @if ($loadbutton && $total >= 5)
                     @if (count($categories) >= $total)
                         <div class="text-center">No more data found</div>
                     @else

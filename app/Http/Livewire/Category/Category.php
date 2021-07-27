@@ -111,4 +111,28 @@ class Category extends Component
         Categoryy::findOrFail($id)->delete();
         $this->notifySuccess('Category Deleted Successfully');
     }
+
+    // Data Status Change
+    public function statusChange($id, $status)
+    {
+        Categoryy::findOrFail($id)->update(['status' => $status]);
+
+        if ($status) {
+            $this->notifySuccess('Category Activated Changed');
+        } else {
+            $this->notifySuccess('Category Inactivated Changed');
+        }
+    }
+
+    // Data Featured Status Change
+    public function featuredChange($id, $status)
+    {
+        Categoryy::findOrFail($id)->update(['featured' => $status]);
+
+        if ($status) {
+            $this->notifySuccess('Category Featured Successfully');
+        } else {
+            $this->notifySuccess('Category Unfeatured Successfully');
+        }
+    }
 }
