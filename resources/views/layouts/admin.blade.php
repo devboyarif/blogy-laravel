@@ -108,11 +108,15 @@
                                 </li>
                             </ul>
                         </li> --}}
-                        <x-sidebar-list :linkActive="Route::is('category') ? true : false" route="category"
+                        <x-sidebar-list :linkActive="Route::is('categories') ? true : false" route="categories"
                             icon="fas fa-list">
                             Category
                         </x-sidebar-list>
-                        <x-sidebar-list :linkActive="Route::is('tag') ? true : false" route="tag" icon="fas fa-tags">
+                        <x-sidebar-list :linkActive="Route::is('posts.index') ? true : false" route="posts.index"
+                            icon="fas fa-tags">
+                            Post
+                        </x-sidebar-list>
+                        <x-sidebar-list :linkActive="Route::is('tags') ? true : false" route="tags" icon="fas fa-tags">
                             Tag
                         </x-sidebar-list>
 

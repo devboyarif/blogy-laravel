@@ -1,8 +1,6 @@
 <tr>
     <td>{{ $tag->id }}</td>
     <td>{{ $tag->name }}</td>
-
-
     <td>
         {{-- edit --}}
         <button wire:click="edit({{ $tag->id }})" class="btn btn-info">Edit</button>
