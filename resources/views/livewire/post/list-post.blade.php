@@ -48,7 +48,7 @@
 
                     <td class="text-center">
                         {{-- edit --}}
-                        <button wire:click="edit({{ $post->id }})" class="btn btn-info">Edit</button>
+                        <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-info">Edit</a>
                         {{-- delete method 2 --}}
                         <button onclick="confirm('Confirm delete?') || event.stopImmediatePropagation()"
                             wire:click="delete({{ $post->id }})" class="btn btn-danger">Delete</button>

@@ -72,9 +72,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $categories = Category::latest()->get(['id', 'name']);
+        $tags = Tag::latest()->get(['id', 'name']);
+        $post->load('tags:id,name', 'category:id,name');
+
+        return view('admin.post.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -84,9 +88,23 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        // post update
+        $post->update($request->except(['thumbnail', 'tags']));
+
+        // thumbnail update
+        if ($request->thumbnail) {
+            deleteImage($post->thumbnail);
+            $url = uploadImage($request->thumbnail, 'posts');
+            $post->update(['thumbnail' => $url]);
+        }
+
+        // tags store
+        $post->tags()->sync($request->tags);
+
+        flashSuccess('Post Updated Successfully');
+        return back();
     }
 
     /**
