@@ -11,11 +11,20 @@ class ListPost extends Component
     use Notification;
 
     public $posts;
+    public $loadbutton = true, $total, $count = 5;
 
     public function render()
     {
-        $this->posts = Post::latest()->get();
+        $this->posts = Post::latest()->take($this->count)->get();
+        $this->total = Post::count();
+
         return view('livewire.post.list-post');
+    }
+
+    // Load More Data
+    public function load()
+    {
+        $this->count += 5;
     }
 
     // Data Delete
