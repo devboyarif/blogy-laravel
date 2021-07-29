@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -30,6 +29,7 @@ class PostController extends Controller
     {
         $categories = Category::latest()->get(['id', 'name']);
         $tags = Tag::latest()->get(['id', 'name']);
+
         return view('admin.post.create', compact('categories', 'tags'));
     }
 
@@ -51,10 +51,8 @@ class PostController extends Controller
         // tags store
         $post->tags()->attach($request->tags);
 
-        return [
-            'post' => $post,
-            'post_tag' => $post->tags,
-        ];
+        flashSuccess('Post Created Successfully');
+        return back();
     }
 
     /**

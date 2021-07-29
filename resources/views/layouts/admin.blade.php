@@ -112,8 +112,9 @@
                             icon="fas fa-list">
                             Category
                         </x-sidebar-list>
-                        <x-sidebar-list :linkActive="Route::is('posts.index') ? true : false" route="posts.index"
-                            icon="fas fa-tags">
+                        <x-sidebar-list
+                            :linkActive="Route::is('posts.index') || Route::is('posts.create') || Route::is('posts.edit') ? true : false"
+                            route="posts.index" icon="fas fa-tags">
                             Post
                         </x-sidebar-list>
                         <x-sidebar-list :linkActive="Route::is('tags') ? true : false" route="tags" icon="fas fa-tags">
@@ -209,6 +210,32 @@
                 "hideMethod": "fadeOut"
             }
         });
+
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @elseif(Session::has('warning'))
+            toastr.warning("{{ Session::get('warning') }}")
+        @elseif(Session::has('error'))
+            toastr.error("{{ Session::get('error') }}")
+        @endif
+
+        // toast config
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "hideMethod": "fadeOut"
+        }
     </script>
     {{-- alpinejs --}}
     <script src="//unpkg.com/alpinejs" defer></script>
