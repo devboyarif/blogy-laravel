@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -23,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.post.create');
+        $categories = Category::latest()->get(['id', 'name']);
+        $tags = Tag::latest()->get(['id', 'name']);
+        return view('admin.post.create', compact('categories', 'tags'));
     }
 
     /**
@@ -32,9 +39,22 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        // post create
+        $post = Post::create($request->except(['thumbnail', 'tags']));
+
+        // thumbnail store
+        $url = uploadImage($request->thumbnail, 'posts');
+        $post->update(['thumbnail' => $url]);
+
+        // tags store
+        $post->tags()->attach($request->tags);
+
+        return [
+            'post' => $post,
+            'post_tag' => $post->tags,
+        ];
     }
 
     /**

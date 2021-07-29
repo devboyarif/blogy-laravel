@@ -15,6 +15,14 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->string('thumbnail')->nullable();
+            $table->text('short_description');
+            $table->longText('long_description');
+            $table->integer('like_count')->default(0);
+            $table->boolean('featured')->default(true);
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

@@ -33,7 +33,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label>Course Title <span class="text-danger">*</span></label>
+                                            <label>Title <span class="text-danger">*</span></label>
                                             <input value="{{ old('title') }}" name="title" type="text"
                                                 class="form-control @error('title') is-invalid @enderror"
                                                 placeholder="Enter Title">
@@ -47,41 +47,75 @@
                                             <select name="category_id"
                                                 class="select2bs4 w-100 @error('category_id') is-invalid @enderror">
                                                 <option value="">Select Category</option>
-                                                {{-- @foreach ($categories as $category)
+                                                @foreach ($categories as $category)
                                                     <option {{ $category->id == old('category_id') ? 'selected' : '' }}
                                                         value="{{ $category->id }}">{{ $category->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                             </select>
                                             @error('category_id') <span class="invalid-feedback"
                                                 role="alert"><strong>{{ $message }}</strong></span> @enderror
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Tag</label>
 
+                                            <select name="tags[]" class="select2bs4 @error('tags') is-invalid @enderror"
+                                                style="width: 100%;" multiple data-placeholder="Select Tag">
+                                                @foreach ($tags as $tag)
+                                                    <option
+                                                        {{ collect(old('tags'))->contains($tag->id) ? 'selected' : '' }}
+                                                        value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('tags') <span class="invalid-feedback"
+                                                role="alert"><strong>{{ $message }}</strong></span> @enderror
 
-
+                                        </div>
+                                        {{-- <div class="form-group">
+                                            <label>Short Description</label>
+                                            <textarea rows="5" type="text" class="form-control" name="short_description"
+                                                placeholder="Write short description of post... ">{{ old('description') }}</textarea>
+                                            @error('short_description') <span class="invalid-feedback d-block"
+                                                role="alert"><strong>{{ $message }}</strong></span> @enderror
+                                        </div> --}}
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Short Description</label>
+                                            <textarea rows="5" type="text" class="form-control" name="short_description"
+                                                placeholder="Write short description of post... ">{{ old('short_description') }}</textarea>
+                                            @error('short_description') <span class="invalid-feedback d-block"
+                                                role="alert"><strong>{{ $message }}</strong></span> @enderror
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <textarea id="editor2" type="text" class="form-control" name="description"
-                                                placeholder="Write description of course... ">{{ old('description') }}</textarea>
+                                            <textarea id="editor2" type="text" class="form-control" name="long_description"
+                                                placeholder="Write long description of post... ">{{ old('long_description') }}</textarea>
+                                            @error('long_description') <span class="invalid-feedback d-block"
+                                                role="alert"><strong>{{ $message }}</strong></span> @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-6 offset-3 text-center">
                                         <button type="submit" class="btn btn-success">
-                                            <i class="fas fa-plus"></i> Create Course
+                                            <i class="fas fa-plus"></i> Create Post
                                         </button>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="text-center mt-5">
-                                    <label class="form-lebel mb-5">Thumbnail Image</label> <br>
+                                <div class="text-center mt-3">
+                                    <label class="form-lebel mb-3">Thumbnail Image</label> <br>
                                     <img width="300px" height="300px" id="image" class="img-fluid"
-                                        src="{{ asset('backend/image/itemdefault.jpeg') }}" alt="image"
+                                        src="{{ asset('backend/image/default-post.png') }}" alt="image"
                                         style="border: 1px solid #adb5bd;margin: 0 auto;padding: 3px;">
 
                                     <div class="upload-btn-wrapper mt-3">
@@ -91,6 +125,8 @@
                                         <button onclick="$('#hiddenImgInput').click()" class="btn btn-info"
                                             type="button">Choose an image</button>
                                     </div>
+                                    @error('thumbnail') <span class="invalid-feedback d-block"
+                                        role="alert"><strong>{{ $message }}</strong></span> @enderror
                                 </div>
                             </div>
                         </div>
