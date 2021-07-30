@@ -51,12 +51,17 @@
                 <!-- Menu Starts Here -->
                 <div class="main-menu d-none d-lg-flex">
                     <ul class="main-menu-items list-unstyled">
-                        <li><a href="{{ route('index') }}"
-                                class="main-menu-item {{ Route::is('index') ? 'active-item' : '' }}">Home</a></li>
-                        <li><a href="#" class="main-menu-item">Travel</a></li>
-                        <li><a href="#" class="main-menu-item">Food</a></li>
-                        <li><a href="#" class="main-menu-item">Lifestyle</a></li>
-                        <li><a href="#" class="main-menu-item">Contact</a></li>
+                        <li>
+                            <a href="{{ route('index') }}"
+                                class="main-menu-item {{ Route::is('index') ? 'active-item' : '' }}">Home</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('posts') }}"
+                                class="main-menu-item {{ Route::is('posts') ? 'active-item' : '' }}">Posts</a>
+                        </li>
+                        <li>
+                            <a href="#" class="main-menu-item">Contact</a>
+                        </li>
                     </ul>
                     <form action="search.html">
                         <div class="header-searchbar">
