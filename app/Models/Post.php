@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -12,26 +13,61 @@ class Post extends Model
 
     protected $guarded = [];
 
-    // slug set
-    public function setTitleAttribute($title)
+    // model binging with slug
+    public function getRouteKeyName()
     {
-        $this->attributes['title'] = $title;
-        $this->attributes['slug'] = Str::slug($title);
+        return 'slug';
     }
 
+    //=====================================================
+    //================= Model Relationship ================
+    //=====================================================
+
+    // tag model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }
 
+    // category model
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    // binging with slug
-    public function getRouteKeyName()
+    // ==================================================
+    // ======================== Scopes ==================
+    // ==================================================
+
+    // global scope with slug and active status
+    public static function boot()
     {
-        return 'slug';
+        parent::boot();
+
+        static::creating(function ($item) {
+            $item->slug = Str::slug($item->title);
+        });
+
+        static::addGlobalScope('status', function ($builder) {
+            $builder->whereStatus(true);
+        });
+    }
+
+    // category
+    public function scopeWithCategory($query)
+    {
+        return $query->with('category:id,name,slug');
+    }
+
+    // status
+    public function scopeStatus($query, $value)
+    {
+        return $query->whereStatus($value);
+    }
+
+    // featured
+    public function scopeFeatured($query, $value)
+    {
+        return $query->whereFeatured($value);
     }
 }

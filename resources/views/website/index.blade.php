@@ -49,7 +49,7 @@
                 @forelse ($top_posts as $post)
                     <div class="col-lg-4 mb-3">
                         <div class="post-feature">
-                            <span class="fs-6 has-line">Travels</span>
+                            <span class="fs-6 has-line">{{ $post->category->name ?? '' }}</span>
                             <h6><a href="details.html">{{ $post->title }}</a></h6>
                             <div class="blog-item-info-release">
                                 <span>March 25, 2021</span> <span class="dot"></span> <span>4 min read</span>
@@ -93,7 +93,7 @@
                                 </a>
                             </div>
                             <div class="blog-item-info">
-                                <span class="fs-6 has-line">Travels</span>
+                                <span class="fs-6 has-line">{{ $post->category->name ?? '' }}</span>
                                 <h5><a href="details.html">{{ $post->title }}</a></h5>
                                 <div class="blog-item-info-release">
                                     <span>March 25, 2021</span> <span class="dot"></span> <span>4 min read</span>
@@ -138,7 +138,7 @@
                                 </a>
                             </div>
                             <div class="blog-item-info">
-                                <span class="fs-6 has-line">Travels</span>
+                                <span class="fs-6 has-line">{{ $post->category->name ?? '' }}</span>
                                 <h5><a href="details.html">{{ $post->title }}</a></h5>
                                 <div class="blog-item-info-release">
                                     <span>March 25, 2021</span> <span class="dot"></span> <span>4 min read</span>

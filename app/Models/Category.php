@@ -12,21 +12,48 @@ class Category extends Model
 
     protected $guarded = [];
 
-    /**
-     * Set the name.
-     * Set the slug.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setNameAttribute($name)
-    {
-        $this->attributes['name'] = $name;
-        $this->attributes['slug'] = Str::slug($name);
-    }
+    //=====================================================
+    //================= Model Relationship ================
+    //=====================================================
 
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    // ==================================================
+    // ======================== Scopes ==================
+    // ==================================================
+
+    // global scope with slug and active status
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($item) {
+            $item->slug = Str::slug($item->name);
+        });
+
+        static::addGlobalScope('status', function ($builder) {
+            $builder->whereStatus(true);
+        });
+    }
+
+    // with posts eager loading
+    public function scopeWithPosts($query)
+    {
+        return $query->with('posts');
+    }
+
+    // status
+    public function scopeStatus($query, $value)
+    {
+        return $query->whereStatus($value);
+    }
+
+    // featured
+    public function scopeFeatured($query, $value)
+    {
+        return $query->whereFeatured($value);
     }
 }

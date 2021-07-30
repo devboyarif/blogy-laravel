@@ -13,11 +13,11 @@ class FrontendController extends Controller
     {
         $posts = Post::query();
 
-        $latest_posts = $posts->latest()->take(6)->get();
-        $featured_posts = $posts->inRandomOrder()->where('featured', true)->take(4)->get();
-        $top_posts = $posts->latest('view_count')->take(6)->get();
+        $latest_posts = $posts->withCategory()->latest()->take(6)->get();
+        $featured_posts = $posts->withCategory()->status(true)->inRandomOrder()->where('featured', true)->take(4)->get();
+        $top_posts = $posts->withCategory()->latest('view_count')->take(6)->get();
         $tags = Tag::all(['id', 'name', 'slug']);
-        $featured_categories = Category::where('featured', true)->get(['id', 'name', 'slug']);
+        return $featured_categories = Category::get(['id', 'name', 'slug']);
 
         return view('website.index', [
             'latest_posts' => $latest_posts,

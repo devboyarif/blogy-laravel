@@ -29,10 +29,10 @@
 
     @if ($loadbutton && $total >= 5)
         @if (count($all_posts) >= $total)
-            <div class="text-center">No more data found</div>
+            <div class="text-center">No more post found</div>
         @else
             <div class="text-center mt-3">
-                <button wire:click="loadMore" wire:loading.remove class="btn btn-primary">Load More</button>
+                <button wire:click="loadMore" wire:loading.remove class="btn btn-primary">Load More Post</button>
                 <button wire:loading class="btn btn-primary">
                     <i class="fas fa-circle-notch fa-spin"></i>
                     &nbsp;Loading
@@ -40,15 +40,4 @@
             </div>
         @endif
     @endif
-
-    {{-- @if ($loadbutton && $total >= 5)
-        @if (count($all_posts) >= $total)
-            <div class="text-center">No more data found</div>
-        @else
-            <div class="text-center mt-3">
-                <button wire:click="loadMore" wire:loading.attr="disabled" class="btn btn-primary">Load More
-                    Data</button>
-            </div>
-        @endif
-    @endif --}}
 </div>
