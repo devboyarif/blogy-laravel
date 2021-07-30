@@ -81,33 +81,7 @@
             </div>
             <div class="row">
                 @forelse ($latest_posts as $post)
-                    <div class="col-lg-4 col-md-6 mb-5">
-                        <div class="blog-item blog-item-sm">
-                            <div class="blog-item-image">
-                                <a href="details.html">
-                                    @if ($post->thumbnail)
-                                        <img src="{{ asset($post->thumbnail) }}" alt="Image">
-                                    @else
-                                        <img src="{{ asset('frontend') }}/dist/images/sm-01.jpg" alt="Image">
-                                    @endif
-                                </a>
-                            </div>
-                            <div class="blog-item-info">
-                                <span class="fs-6 has-line">{{ $post->category->name ?? '' }}</span>
-                                <h5><a href="details.html">{{ $post->title }}</a></h5>
-                                <div class="blog-item-info-release">
-                                    <span>March 25, 2021</span> <span class="dot"></span> <span>4 min read</span>
-                                </div>
-                                <a href="details.html" class="btn btn-link">Read Article
-                                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12.5 1.5L17 6M17 6L12.5 10.5M17 6H1" stroke="currentColor"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <x-single-post :post="$post" column="col-lg-4 col-md-6 fgdfg" :bigPost="false" />
                 @empty
                     No post found
                 @endforelse
@@ -126,33 +100,7 @@
             </div>
             <div class="row">
                 @forelse ($featured_posts as $post)
-                    <div class="col-lg-6 col-md-6 mb-5">
-                        <div class="blog-item">
-                            <div class="blog-item-image">
-                                <a href="details.html">
-                                    @if ($post->thumbnail)
-                                        <img src="{{ asset($post->thumbnail) }}" alt="Image">
-                                    @else
-                                        <img src="{{ asset('frontend') }}/dist/images/01.jpg" alt="Image">
-                                    @endif
-                                </a>
-                            </div>
-                            <div class="blog-item-info">
-                                <span class="fs-6 has-line">{{ $post->category->name ?? '' }}</span>
-                                <h5><a href="details.html">{{ $post->title }}</a></h5>
-                                <div class="blog-item-info-release">
-                                    <span>March 25, 2021</span> <span class="dot"></span> <span>4 min read</span>
-                                </div>
-                                <a href="details.html" class="btn btn-link">Read Article
-                                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12.5 1.5L17 6M17 6L12.5 10.5M17 6H1" stroke="currentColor"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <x-single-post :post="$post" />
                 @empty
                     No post found
                 @endforelse
@@ -182,14 +130,6 @@
                                 <a href="#">{{ $category->name }}</a>
                             </div>
                         @endforeach
-                        {{-- <div class="featured-category-item"
-                            style="background-image: url({{ asset('frontend') }}/dist/images/category-02.jpg);">
-                            <a href="#">Food</a>
-                        </div>
-                        <div class="featured-category-item mb-0"
-                            style="background-image: url({{ asset('frontend') }}/dist/images/category-03.jpg);">
-                            <a href="#">Lifestyle</a>
-                        </div> --}}
                     </div>
                     <div class="all-tags">
                         <h6>All Tags</h6>

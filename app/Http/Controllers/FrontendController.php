@@ -18,7 +18,7 @@ class FrontendController extends Controller
         $featured_posts = $posts->withCategory()->status(true)->inRandomOrder()->where('featured', true)->take(4)->get();
         $top_posts = $posts->withCategory()->latest('view_count')->take(6)->get();
         $tags = Tag::all(['id', 'name', 'slug']);
-        $featured_categories = Category::get(['id', 'name', 'slug']);
+        $featured_categories = Category::take(5)->get(['id', 'name', 'slug']);
 
         return view('website.index', [
             'latest_posts' => $latest_posts,

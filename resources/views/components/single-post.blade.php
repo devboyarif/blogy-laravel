@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-md-6 mb-5">
+<div class="{{ $column }} mb-5">
     <div class="blog-item {{ $bigPost ? '' : 'blog-item-sm' }}">
         <div class="blog-item-image">
             <a href="{{ route('details', $post->slug) }}">
