@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-lg-10">
                     <div class="blog-intro-area">
-                        <span class="has-line fs-6"><a href="#">Interior</a></span>
+                        <span class="has-line fs-6"><a href="#">{{ $post->category->name ?? '' }}</a></span>
                         <h3>{{ $post->title }}</h3>
                         <div class="blog-intro-area-bottom">
                             <div class="intro-start">
@@ -252,52 +252,35 @@
                 <a href="#">View All</a>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 mb-4 mb-md-0 mb-lg-0">
-                    <div class="blog-item">
-                        <div class="blog-item-image">
-                            <a href="details.html">
-                                <img src="dist/images/01.jpg" alt="Image">
-                            </a>
-                        </div>
-                        <div class="blog-item-info">
-                            <span class="fs-6 has-line">Travels</span>
-                            <h5><a href="details.html">How to Get Started With UI/UX in Figma</a></h5>
-                            <div class="blog-item-info-release">
-                                <span>March 25, 2021</span> <span class="dot"></span> <span>4 min read</span>
+                @foreach ($related_posts as $post)
+                    <div class="col-lg-6 col-md-6 mb-4 mb-md-0 mb-lg-0">
+                        <div class="blog-item">
+                            <div class="blog-item-image">
+                                <a href="details.html">
+                                    @if ($post->thumbnail)
+                                        <img src="{{ asset($post->thumbnail) }}" alt="Image">
+                                    @else
+                                        <img src="{{ asset('frontend') }}/dist/images/01.jpg" alt="Image">
+                                    @endif
+                                </a>
                             </div>
-                            <a href="details.html" class="btn btn-link">Read Article
-                                <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.5 1.5L17 6M17 6L12.5 10.5M17 6H1" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </a>
+                            <div class="blog-item-info">
+                                <span class="fs-6 has-line">{{ $post->category->name ?? '' }}</span>
+                                <h5><a href="details.html">{{ $post->title }}</a></h5>
+                                <div class="blog-item-info-release">
+                                    <span>March 25, 2021</span> <span class="dot"></span> <span>4 min read</span>
+                                </div>
+                                <a href="details.html" class="btn btn-link">Read Article
+                                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 1.5L17 6M17 6L12.5 10.5M17 6H1" stroke="currentColor"
+                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="blog-item">
-                        <div class="blog-item-image">
-                            <a href="details.html">
-                                <img src="dist/images/05.jpg" alt="Image">
-                            </a>
-                        </div>
-                        <div class="blog-item-info">
-                            <span class="fs-6 has-line">Travels</span>
-                            <h5><a href="details.html">Nulla facilisi. Pellentes dui ligula, varius non.</a></h5>
-                            <div class="blog-item-info-release">
-                                <span>March 25, 2021</span> <span class="dot"></span> <span>4 min read</span>
-                            </div>
-                            <a href="details.html" class="btn btn-link">Read Article
-                                <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.5 1.5L17 6M17 6L12.5 10.5M17 6H1" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

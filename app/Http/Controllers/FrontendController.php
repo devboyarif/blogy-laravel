@@ -32,6 +32,17 @@ class FrontendController extends Controller
     // post details
     public function details(Post $post)
     {
-        return view('website.details', compact('post'));
+        // related posts
+        $related_posts = Post::where([
+            ['category_id', $post->category_id], ['id', '!=', $post->id]
+        ])->latest()->take(6)->get();
+
+        // load category
+        $post->load('category:id,name');
+
+        return view('website.details', [
+            'post' => $post,
+            'related_posts' => $related_posts,
+        ]);
     }
 }
