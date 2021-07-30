@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->integer('view_count')->default(0);
             $table->boolean('featured')->default(true);
             $table->boolean('status')->default(true);
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }
