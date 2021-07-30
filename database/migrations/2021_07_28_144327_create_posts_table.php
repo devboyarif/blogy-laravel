@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->text('short_description');
             $table->longText('long_description');
             $table->integer('like_count')->default(0);
+            $table->integer('view_count')->default(0);
             $table->boolean('featured')->default(true);
             $table->boolean('status')->default(true);
             $table->timestamps();

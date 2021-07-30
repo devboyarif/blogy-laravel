@@ -9,10 +9,16 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $latests_posts = Post::latest()->take(6)->get();
+        $posts = Post::query();
+
+        $latest_posts = $posts->latest()->take(6)->get();
+        $featured_posts = $posts->inRandomOrder()->where('featured', true)->take(4)->get();
+        $top_posts = $posts->latest('view_count')->take(6)->get();
 
         return view('website.index', [
-            'latests_posts' => $latests_posts
+            'latest_posts' => $latest_posts,
+            'featured_posts' => $featured_posts,
+            'top_posts' => $top_posts,
         ]);
     }
 }

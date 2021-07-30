@@ -18,7 +18,7 @@
 
     <!-- Theme CSS Link -->
     <link rel="stylesheet" href="{{ asset('frontend') }}/dist/css/main.css">
-
+    @livewireStyles
     <title>Blogy-Home</title>
 </head>
 
@@ -179,6 +179,8 @@
 
     <!-- Custom JS Link -->
     <script src="{{ asset('frontend') }}/dist/js/main.js"></script>
+
+    @livewireScripts
 </body>
 
 </html>
