@@ -176,32 +176,27 @@
                 <div class="col-lg-4 mt-4 mt-lg-0">
                     <div class="featured-category">
                         <h6>Featured Category</h6>
-                        <div class="featured-category-item"
-                            style="background-image: url({{ asset('frontend') }}/dist/images/category-01.jpg);">
-                            <a href="#">Travel</a>
-                        </div>
-                        <div class="featured-category-item"
+                        @foreach ($featured_categories as $category)
+                            <div class="featured-category-item"
+                                style="background-image: url({{ asset($category->thumbnail ? $category->thumbnail : 'frontend/dist/images/category-02.jpg') }});">
+                                <a href="#">{{ $category->name }}</a>
+                            </div>
+                        @endforeach
+                        {{-- <div class="featured-category-item"
                             style="background-image: url({{ asset('frontend') }}/dist/images/category-02.jpg);">
                             <a href="#">Food</a>
                         </div>
                         <div class="featured-category-item mb-0"
                             style="background-image: url({{ asset('frontend') }}/dist/images/category-03.jpg);">
                             <a href="#">Lifestyle</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="all-tags">
                         <h6>All Tags</h6>
                         <ul class="list-unstyled list-inline all-tags-list">
-                            <li class="list-inline-item"><a href="#">Journey</a></li>
-                            <li class="list-inline-item"><a href="#">Life</a></li>
-                            <li class="list-inline-item"><a href="#">Food</a></li>
-                            <li class="list-inline-item"><a href="#">Fashion</a></li>
-                            <li class="list-inline-item"><a href="#">UI</a></li>
-                        </ul>
-                        <ul class="list-unstyled list-inline all-tags-list mb-0">
-                            <li class="list-inline-item"><a href="#">Interior</a></li>
-                            <li class="list-inline-item"><a href="#">Minimalistic</a></li>
-                            <li class="list-inline-item"><a href="#">Design</a></li>
+                            @foreach ($tags as $tag)
+                                <li class="list-inline-item m-1"><a href="#">{{ $tag->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
