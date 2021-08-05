@@ -31,11 +31,9 @@
                                 <div class="intro-start-release d-flex">
                                     <div>
                                         <span class="dot"></span>
-                                        <span class="intro-start-time">March 25, 2021</span>
-                                    </div>
-                                    <div>
-                                        <span class="dot"></span>
-                                        <span class="intro-start-time">4 min read</span>
+                                        <span
+                                            class="intro-start-time">{{ Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span><span
+                                            class="dot"></span><span>4 min read</span>
                                     </div>
                                 </div>
                             </div>
@@ -249,14 +247,14 @@
         <div class="container">
             <div class="blog-item-feature-heading">
                 <h4>You May Also Like</h4>
-                <a href="#">View All</a>
+                <a href="{{ route('posts') }}">View All</a>
             </div>
             <div class="row">
                 @foreach ($related_posts as $post)
                     <div class="col-lg-6 col-md-6 mb-4 mb-md-0 mb-lg-0">
                         <div class="blog-item">
                             <div class="blog-item-image">
-                                <a href="details.html">
+                                <a href="{{ route('details', $post->slug) }}">
                                     @if ($post->thumbnail)
                                         <img src="{{ asset($post->thumbnail) }}" alt="Image">
                                     @else
@@ -266,11 +264,12 @@
                             </div>
                             <div class="blog-item-info">
                                 <span class="fs-6 has-line">{{ $post->category->name ?? '' }}</span>
-                                <h5><a href="details.html">{{ $post->title }}</a></h5>
+                                <h5><a href="{{ route('details', $post->slug) }}">{{ $post->title }}</a></h5>
                                 <div class="blog-item-info-release">
-                                    <span>March 25, 2021</span> <span class="dot"></span> <span>4 min read</span>
+                                    <span>{{ Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span><span
+                                        class="dot"></span><span>4 min read</span>
                                 </div>
-                                <a href="details.html" class="btn btn-link">Read Article
+                                <a href="{{ route('details', $post->slug) }}" class="btn btn-link">Read Article
                                     <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12.5 1.5L17 6M17 6L12.5 10.5M17 6H1" stroke="currentColor"

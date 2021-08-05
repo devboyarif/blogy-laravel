@@ -29,7 +29,7 @@ class PostFactory extends Factory
             'title' => $this->faker->name(3),
             'slug' => Str::slug($this->faker->name(3)),
             'short_description' => $this->faker->sentence(3),
-            'long_description' => $this->faker->paragraph(3),
+            'long_description' => $this->faker->paragraph(100),
             'created_by' => User::inRandomOrder()->first()->id,
         ];
     }

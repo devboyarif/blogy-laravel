@@ -13,7 +13,7 @@
             <span class="fs-6 has-line">{{ $post->category->name ?? '' }}</span>
             <h5><a href="{{ route('details', $post->slug) }}">{{ $post->title }}</a></h5>
             <div class="blog-item-info-release">
-                <span>March 25, 2021</span> <span class="dot"></span> <span>4 min read</span>
+                <span>{{ Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span> <span class="dot"></span>
             </div>
             <a href="{{ route('details', $post->slug) }}" class="btn btn-link">Read Article
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
