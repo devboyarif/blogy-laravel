@@ -30,44 +30,40 @@
                 </form>
                 <div class="comments-area-content">
                     <h5>Comments <span>(02)</span></h5>
-                    <div class="comments">
-                        <div class="comments-owner">
-                            <div class="comments-owner-image">
-                                <a href="#" class="d-block">
-                                    <img src="dist/images/cowner.png" alt="Image">
-                                </a>
+                    @foreach ($comments as $comment)
+                        <div class="comments">
+                            <div class="comments-owner">
+                                <div class="comments-owner-image">
+                                    <a href="#" class="d-block">
+                                        <img src="{{ asset('backend/image/default.png') }}" alt="Image">
+                                    </a>
+                                </div>
+                                <div class="comments-owner-text">
+                                    <p><a href="#">{{ $comment->name }}</a></p>
+                                    <span>{{ $comment->created_at->diffForHumans() }}</span>
+                                </div>
                             </div>
-                            <div class="comments-owner-text">
-                                <p><a href="#">Kevin</a></p>
-                                <span>2 hours ago</span>
-                            </div>
+                            <p>
+                                {{ $comment->body }}
+                            </p>
                         </div>
-                        <p>
-                            Donec pellentesque luctus tortor finibus blandit. Fusce tincidunt lectus augue, quis commodo
-                            justo tincidunt eget. Praesent at elit diam.
-                        </p>
-                    </div>
-                    <div class="comments">
-                        <div class="comments-owner">
-                            <div class="comments-owner-image">
-                                <a href="#" class="d-block">
-                                    <img src="dist/images/cowner.png" alt="Image">
-                                </a>
-                            </div>
-                            <div class="comments-owner-text">
-                                <p><a href="#">Marry</a></p>
-                                <span>2 hours ago</span>
-                            </div>
-                        </div>
-                        <p>
-                            Nulla varius enim eu dui venenatis, nec lacinia urna gravida. Vivamus euismod tincidunt eros
-                            at bibendum. Proin lacus dolor, posuere et posuere eu, congue posuere lectus. Suspendisse id
-                            lorem egestas, volutpat lacus a, auctor justo. Cras ac elementum arcu, eget ornare massa.
-                            Donec eget urna magna. Fusce vestibulum arcu eu libero ullamcorper, nec semper dolor
-                            bibendum. Mauris laoreet justo massa, vitae venenatis augue dignissim ac.
-                        </p>
-                    </div>
+                    @endforeach
+
                 </div>
+                @if ($loadbutton && $total >= 5)
+                    @if (count($comments) >= $total)
+                        <div class="text-center">No more comment found</div>
+                    @else
+                        <div class="text-center mt-3">
+                            <button wire:click="load" wire:loading.remove class="btn btn-primary">Load More
+                                Data</button>
+                            <button wire:loading class="btn btn-primary">
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                                &nbsp;Loading
+                            </button>
+                        </div>
+                    @endif
+                @endif
                 {{-- <h5>Write a Replay</h5>
                 <form action="#">
                     <div class="row g-3">

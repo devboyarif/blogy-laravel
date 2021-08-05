@@ -7,11 +7,32 @@ use Livewire\Component;
 
 class Comment extends Component
 {
-    public $name, $email, $body, $post_id;
+    public $comments, $name, $email, $body, $post_id;
+    public $loadbutton = true, $total, $count = 5;
 
     public function render()
     {
+        $this->comments = Commentt::where('post_id', $this->post_id)
+            ->latest()
+            ->take($this->count)
+            ->get();
+        $this->total = Commentt::count();
+
         return view('livewire.comment.comment');
+    }
+
+    // Load More Data
+    public function load()
+    {
+        $this->count += 5;
+    }
+
+    //reset form
+    public function resetForm()
+    {
+        $this->name = '';
+        $this->email = '';
+        $this->body = '';
     }
 
     // Store comment
@@ -32,7 +53,7 @@ class Comment extends Component
         ];
 
         Commentt::create($data);
-        $this->reset();
+        $this->resetForm();
         session()->flash('success', 'Comment Posted Successful.');
         $this->emit('created');
     }
