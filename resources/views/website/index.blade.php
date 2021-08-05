@@ -49,7 +49,7 @@
                             <span class="fs-6 has-line">{{ $post->category->name ?? '' }}</span>
                             <h6><a href="{{ route('details', $post->slug) }}">{{ $post->title }}</a></h6>
                             <div class="blog-item-info-release">
-                                <span>March 25, 2021</span> <span class="dot"></span>
+                                <span>March 25, 2021</span><span class="dot"></span><span>4 min read</span>
                             </div>
                             <a href="{{ route('details', $post->slug) }}" class="btn btn-link">Read Article
                                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none"
