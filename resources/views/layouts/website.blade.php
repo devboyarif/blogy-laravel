@@ -186,6 +186,9 @@
     <!-- Custom JS Link -->
     <script src="{{ asset('frontend') }}/dist/js/main.js"></script>
 
+    {{-- alpinejs --}}
+    <script src="//unpkg.com/alpinejs" defer></script>
+
     @livewireScripts
 </body>
 
