@@ -16,7 +16,7 @@ class Comment extends Component
             ->latest()
             ->take($this->count)
             ->get();
-        $this->total = Commentt::count();
+        $this->total = Commentt::where('post_id', $this->post_id)->count();
 
         return view('livewire.comment.comment');
     }

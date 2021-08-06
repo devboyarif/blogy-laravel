@@ -28,28 +28,31 @@
                         <button type="submit" class="btn-default">Post Commnent</button>
                     </div>
                 </form>
-                <div class="comments-area-content">
-                    <h5>Comments <span>(02)</span></h5>
-                    @foreach ($comments as $comment)
-                        <div class="comments">
-                            <div class="comments-owner">
-                                <div class="comments-owner-image">
-                                    <a href="#" class="d-block">
-                                        <img src="{{ asset('backend/image/default.png') }}" alt="Image">
-                                    </a>
-                                </div>
-                                <div class="comments-owner-text">
-                                    <p><a href="#">{{ $comment->name }}</a></p>
-                                    <span>{{ $comment->created_at->diffForHumans() }}</span>
-                                </div>
-                            </div>
-                            <p>
-                                {{ $comment->body }}
-                            </p>
-                        </div>
-                    @endforeach
+                @if ($total != 0)
 
-                </div>
+                    <div class="comments-area-content">
+                        <h5>Comments <span>({{ $total }})</span></h5>
+                        @foreach ($comments as $comment)
+                            <div class="comments">
+                                <div class="comments-owner">
+                                    <div class="comments-owner-image">
+                                        <a href="javascript:void(0)" class="d-block">
+                                            <img src="{{ asset('backend/image/default.png') }}" alt="Image">
+                                        </a>
+                                    </div>
+                                    <div class="comments-owner-text">
+                                        <p><a href="#">{{ $comment->name }}</a></p>
+                                        <span>{{ $comment->created_at->diffForHumans() }}</span>
+                                    </div>
+                                </div>
+                                <p>
+                                    {{ $comment->body }}
+                                </p>
+                            </div>
+                        @endforeach
+
+                    </div>
+                @endif
                 @if ($loadbutton && $total >= 5)
                     @if (count($comments) >= $total)
                         <div class="text-center">No more comment found</div>
@@ -64,7 +67,9 @@
                         </div>
                     @endif
                 @endif
-                {{-- <h5>Write a Replay</h5>
+                {{-- @if ()
+
+                <h5>Write a Replay</h5>
                 <form action="#">
                     <div class="row g-3">
                         <div class="col-lg-6">
@@ -78,7 +83,8 @@
                     <div class="d-flex justify-content-lg-end">
                         <button type="submit" class="btn-default">Post Commnent</button>
                     </div>
-                </form> --}}
+                </form>
+                @endif --}}
             </div>
         </div>
     </div>
