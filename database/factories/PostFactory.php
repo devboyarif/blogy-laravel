@@ -24,10 +24,14 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        $id = rand(1, 600);
+        $image = 'https://picsum.photos/id/' . $id . '/700/600';
+
         return [
             'category_id' => Category::inRandomOrder()->first()->id,
             'title' => $this->faker->name(3),
             'slug' => Str::slug($this->faker->name(3)),
+            'thumbnail' => $image,
             'short_description' => $this->faker->sentence(3),
             'long_description' => $this->faker->paragraph(100),
             'created_by' => User::inRandomOrder()->first()->id,
