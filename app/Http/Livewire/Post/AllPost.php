@@ -7,17 +7,17 @@ use App\Models\Post;
 
 class AllPost extends Component
 {
-    public $bigPost = true;
+    public $bigPost = true, $search = true;
     public $all_posts;
     public $loadbutton = true, $total, $count = 4;
-    public $searchTerm, $isSearch = false;
+    public $searchTerm, $isSearching = false;
 
 
     public function render()
     {
         $posts =  Post::query();
 
-        if ($this->isSearch && $this->searchTerm) {
+        if ($this->isSearching && $this->searchTerm) {
             $searchTerm = '%' . $this->searchTerm . '%';
             $this->all_posts = $posts->where('title', 'LIKE', $searchTerm)
                 ->withCategory()
@@ -38,9 +38,9 @@ class AllPost extends Component
     public function searchitems()
     {
         if ($this->searchTerm) {
-            $this->isSearch = true;
+            $this->isSearching = true;
         } else {
-            $this->isSearch = false;
+            $this->isSearching = false;
         }
     }
 

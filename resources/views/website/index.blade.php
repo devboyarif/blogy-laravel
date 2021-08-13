@@ -116,7 +116,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-8">
-                    @livewire('post.all-post', ['bigPost' => false])
+                    @livewire('post.all-post', ['bigPost' => false,'search' => false])
                 </div>
                 <div class="col-lg-4 mt-4 mt-lg-0">
                     <div class="featured-category">
