@@ -4,6 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('register', function () {
+    return redirect('login');
+});
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('home');
     Route::view('categories', 'admin.category')->name('categories');
