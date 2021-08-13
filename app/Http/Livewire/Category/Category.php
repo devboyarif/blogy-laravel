@@ -12,7 +12,6 @@ class Category extends Component
     use Notification;
 
     public $loadbutton = true, $total, $count = 5;
-    public $searchTerm;
     public $categories, $name, $category_id, $updateMode = false;
 
 
