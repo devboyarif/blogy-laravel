@@ -16,7 +16,7 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory(20)->create();
+        Post::factory(50)->create();
 
         for ($i = 0; $i < 50; $i++) {
             DB::table('post_tag')->insert(
